@@ -41,6 +41,19 @@ public class App extends Application {
             );
         });
 
+        botaoArquivos.setOnAction(event -> {
+            layoutPrincipal.setCenter(
+                new Label("Tela de Arquivos - em desenvolvimento")
+            );
+        });
+
+        botaoProcessamento.setOnAction(event -> {
+            layoutPrincipal.setCenter(
+                new Label("Tela de Processamento - em desenvolvimento")
+            );
+        });
+
+
         // 4. Área central
         Label mensagemInicial = new Label(
             "Bem-vindo ao DataDesk! Selecione uma opção no menu."
