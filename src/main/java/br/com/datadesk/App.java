@@ -42,9 +42,21 @@ public class App extends Application {
         });
 
         botaoArquivos.setOnAction(event -> {
-            layoutPrincipal.setCenter(
-                new Label("Tela de Arquivos - em desenvolvimento")
+            
+            Label tituloArquivos = new Label("Importação de Arquivos CSV");
+
+            Button botaoSelecionar = new Button("Selecionar CSV");
+
+            Label arquivoSelecionado = new Label("Nenhum arquivo selecionado");
+
+            VBox telaArquivos = new VBox(
+                15,
+                tituloArquivos,
+                botaoSelecionar,
+                arquivoSelecionado
             );
+            
+            layoutPrincipal.setCenter(telaArquivos);
         });
 
         botaoProcessamento.setOnAction(event -> {
