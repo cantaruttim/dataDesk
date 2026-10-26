@@ -2,13 +2,15 @@
 package br.com.datadesk;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -75,15 +77,45 @@ public class App extends Application {
 
                 seletor.getExtensionFilters().add(filtroCSV);
 
-                File arquivos = seletor.showOpenDialog(stage);
+                File arquivo = seletor.showOpenDialog(stage);
 
-                if (arquivos != null) {
-                    arquivoSelecionado.setText(
-                        "Arquivo selecionado: " + 
-                        arquivos.getName()
-                    );
+                // if (arquivos != null) {
+                //     arquivoSelecionado.setText(
+                //         "Arquivo selecionado: " + 
+                //         arquivos.getName()
+                //     );
+                // }
+
+                if (arquivo != null) {
+                    try {
+
+                        List<String> linhas = Files.readAllLines(
+                            arquivo.toPath()
+                        );
+
+                        if (linhas.isEmpty()) {
+                            arquivoSelecionado.setText(
+                                "O arquivo está vazio."
+                            );
+                        } else {
+                            String cabecalho = linhas.get(0);
+
+                            int quantidadeRegistros = linhas.size() - 1;
+
+                            arquivoSelecionado.setText(
+                                "Arquivo: " + arquivo.getName() 
+                                + "\nColunas: " + cabecalho
+                                + "\nRegistros: " + quantidadeRegistros
+                            );
+                        }
+                        
+                    } catch (IOException erro) {
+                        arquivoSelecionado.setText(
+                            "Erro ao ler o arquivo: " + erro.getMessage()
+                        );
+                    }
                 }
-                
+
             });
 
 
