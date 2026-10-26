@@ -160,6 +160,22 @@ public class App extends Application {
                                 tabela.getColumns().add(coluna);
                             }
 
+                            // Coluna de Status
+                            TableColumn<RegistroCSV, String> colunaStatus = 
+                                new TableColumn<>("Status");
+                            
+                            colunaStatus.setCellValueFactory(celula -> {
+                                RegistroCSV registro = celula.getValue();
+
+                                String status = registro.isValido()
+                                    ? "Válido"
+                                    : "Inválido";
+                                    
+                                return new ReadOnlyStringWrapper(status);
+                            });    
+
+                            tabela.getColumns().add(colunaStatus);
+
                             // Preparando os registros
                             ObservableList<RegistroCSV> dadosTabela = 
                                 FXCollections.observableArrayList();
