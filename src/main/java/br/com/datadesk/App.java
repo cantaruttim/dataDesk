@@ -88,9 +88,13 @@ public class App extends Application {
 
                 if (arquivo != null) {
                     try {
-
+                        
+                        /*
+                        .readAllLines -> lê o conteúdo do arquivo e devolve uma lista de string
+                        Cada elemento representa uma linha do arquivo. 
+                        */ 
                         List<String> linhas = Files.readAllLines(
-                            arquivo.toPath()
+                            arquivo.toPath() // converte o objeto File
                         );
 
                         if (linhas.isEmpty()) {
@@ -98,13 +102,18 @@ public class App extends Application {
                                 "O arquivo está vazio."
                             );
                         } else {
-                            String cabecalho = linhas.get(0);
+                            String cabecalho = linhas.get(0); // primeira linha como cabecalho
 
                             int quantidadeRegistros = linhas.size() - 1;
 
+                            // lendo cada valor como um texto unico -> array de string
+                            String[] colunas = cabecalho.split(";", -1);
+                            int quantidadeColunas = colunas.length;
+
                             arquivoSelecionado.setText(
                                 "Arquivo: " + arquivo.getName() 
-                                + "\nColunas: " + cabecalho
+                                + "\nColunas: " + quantidadeColunas
+                                + "\nCabeçalho: " + cabecalho
                                 + "\nRegistros: " + quantidadeRegistros
                             );
                         }
