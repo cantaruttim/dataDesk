@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -140,18 +141,19 @@ public class App extends Application {
                             int quantidadeColunas = colunas.length;
 
                             // Criando a TableView
-                            TableView<String[]> tabela = new TableView<>();
+                            TableView<RegistroCSV> tabela = new TableView<>();
 
                             //Criando as colunas dinamicamente
                             for (int i = 0; i < colunas.length; i++) {
                                 final int indice = i;
 
-                                TableColumn<String[], String> coluna = 
+                                TableColumn<RegistroCSV, String> coluna = 
                                     new TableColumn<>(colunas[i]);
 
                                 coluna.setCellValueFactory(celula ->
                                     new ReadOnlyStringWrapper(
-                                        celula.getValue()[indice]
+                                        // acesso ao array por meio do getCampos
+                                        celula.getValue().getCampos()[indice]
                                     )
                                 );
 
@@ -159,17 +161,42 @@ public class App extends Application {
                             }
 
                             // Preparando os registros
-                            ObservableList<String[]> dadosTabela = 
+                            ObservableList<RegistroCSV> dadosTabela = 
                                 FXCollections.observableArrayList();
 
                             for (int i = 1; i < linhas.size(); i++) {
                                 String[] campos = linhas.get(i).split(";", -1);
 
-                                dadosTabela.add(campos);
+                                RegistroCSV registros = new RegistroCSV(
+                                    campos, quantidadeColunas
+                                );
+
+                                System.out.println(
+                                    "Registro: " + linhas.get(i)
+                                    + " | Válido: " + registros.isValido()
+                                );
+
+                                dadosTabela.add(registros);
                             }
 
                             // Conectando os dados com a tabela
                             tabela.setItems(dadosTabela);
+
+                            tabela.setRowFactory(tv -> new TableRow<RegistroCSV>() {
+
+                                @Override 
+                                protected void updateItem(RegistroCSV registro, boolean vazio) {
+                                    super.updateItem(registro, vazio);
+
+                                    if (vazio || registro == null) {
+                                        setStyle("");
+                                    } else if (!registro.isValido()) {
+                                        setStyle("-fx-background-color: #ffd6d6;");
+                                    } else {
+                                        setStyle("");
+                                    }
+                                }
+                            });
 
                             // Exibindo o resumo do arquivo
                             arquivoSelecionado.setText(
