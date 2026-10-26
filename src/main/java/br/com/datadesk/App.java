@@ -1,6 +1,8 @@
 
 package br.com.datadesk;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -57,6 +60,34 @@ public class App extends Application {
             );
             
             layoutPrincipal.setCenter(telaArquivos);
+
+            botaoSelecionar.setOnAction(selecaoEvent -> {
+                
+                FileChooser seletor = new FileChooser();
+
+                seletor.setTitle("Selecionar arquivo CSV");
+
+                FileChooser.ExtensionFilter filtroCSV = 
+                    new FileChooser.ExtensionFilter(
+                        "Arquivo CSV (*.csv)",
+                        "*.csv"
+                    );
+
+                seletor.getExtensionFilters().add(filtroCSV);
+
+                File arquivos = seletor.showOpenDialog(stage);
+
+                if (arquivos != null) {
+                    arquivoSelecionado.setText(
+                        "Arquivo selecionado: " + 
+                        arquivos.getName()
+                    );
+                }
+                
+            });
+
+
+
         });
 
         botaoProcessamento.setOnAction(event -> {
