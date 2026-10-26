@@ -7,9 +7,14 @@ import java.nio.file.Files;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -102,9 +107,18 @@ public class App extends Application {
                                 "O arquivo está vazio."
                             );
                         } else {
+
+                            /* 
                             String cabecalho = linhas.get(0); // primeira linha como cabecalho
 
                             int quantidadeRegistros = linhas.size() - 1;
+
+                            // implementando a TableView
+                            String primeiraLinhaDeDados = linhas.size() > 1
+                                ? linhas.get(1)
+                                : "";
+
+                            String[] campos = primeiraLinhaDeDados.split(";", -1);
 
                             // lendo cada valor como um texto unico -> array de string
                             String[] colunas = cabecalho.split(";", -1);
@@ -115,7 +129,63 @@ public class App extends Application {
                                 + "\nColunas: " + quantidadeColunas
                                 + "\nCabeçalho: " + cabecalho
                                 + "\nRegistros: " + quantidadeRegistros
+                                + "\nPrimeiro registro: " + primeiraLinhaDeDados
+                                + "\nCampos encontrados: " + campos.length
                             );
+                            */
+
+                            String cabecalho = linhas.get(0);
+                            String[] colunas = cabecalho.split(";", -1);
+                            int quantidadeRegistros = linhas.size() - 1;
+                            int quantidadeColunas = colunas.length;
+
+                            // Criando a TableView
+                            TableView<String[]> tabela = new TableView<>();
+
+                            //Criando as colunas dinamicamente
+                            for (int i = 0; i < colunas.length; i++) {
+                                final int indice = i;
+
+                                TableColumn<String[], String> coluna = 
+                                    new TableColumn<>(colunas[i]);
+
+                                coluna.setCellValueFactory(celula ->
+                                    new ReadOnlyStringWrapper(
+                                        celula.getValue()[indice]
+                                    )
+                                );
+
+                                tabela.getColumns().add(coluna);
+                            }
+
+                            // Preparando os registros
+                            ObservableList<String[]> dadosTabela = 
+                                FXCollections.observableArrayList();
+
+                            for (int i = 1; i < linhas.size(); i++) {
+                                String[] campos = linhas.get(i).split(";", -1);
+
+                                dadosTabela.add(campos);
+                            }
+
+                            // Conectando os dados com a tabela
+                            tabela.setItems(dadosTabela);
+
+                            // Exibindo o resumo do arquivo
+                            arquivoSelecionado.setText(
+                                "Arquivo: " + arquivo.getName()
+                                + " | Colunas: " + quantidadeColunas
+                                + " | Registros: " + quantidadeRegistros
+                            );
+
+                            // atualizar a tela de arquivos
+                            telaArquivos.getChildren().setAll(
+                                tituloArquivos,
+                                botaoSelecionar,
+                                arquivoSelecionado,
+                                tabela  
+                            );
+
                         }
                         
                     } catch (IOException erro) {
