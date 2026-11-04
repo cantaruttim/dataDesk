@@ -1,0 +1,61 @@
+
+
+
+
+/* Configuração geral da aplicação */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 13px;
+    -fx-background-color: #F2F5F9;
+}
+
+/* Textos */
+.label {
+    -fx-text-fill: #263445;
+}
+
+/* Botões */
+.button {
+    -fx-background-color: #2878C8;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-padding: 9px 16px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #1D5F9F;
+}
+
+/* Tabela */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #DCE3EB;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+/* Cabeçalho da tabela */
+.table-view .column-header-background {
+    -fx-background-color: #E8EEF5;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: #E8EEF5;
+    -fx-size: 36px;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #263445;
+}
+
+/* Linhas da tabela */
+.table-row-cell {
+    -fx-cell-size: 34px;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #D6E8FA;
+}

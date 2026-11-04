@@ -280,6 +280,19 @@ public class App extends Application {
         // 6. Cena e janela
         Scene cena = new Scene(layoutPrincipal, 900, 600);
 
+        // add estilo ao sistema
+        var caminhoCss = getClass().getResource("/br/com/datadesk/datadesk.css");
+
+        if (caminhoCss == null) {
+            throw new IllegalStateException(
+                "Arquivo css não encontrado."
+            );
+        }
+
+        cena.getStylesheets().add(
+            caminhoCss.toExternalForm()
+        );
+
         stage.setTitle("DataDesk - Data Engineering Tool");
         stage.setScene(cena);
         stage.show();
