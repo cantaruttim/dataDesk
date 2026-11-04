@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.css.PseudoClass;
 
 public class App extends Application {
 
@@ -213,19 +214,20 @@ public class App extends Application {
                             // Conectando os dados com a tabela
                             tabela.setItems(dadosTabela);
 
+                            PseudoClass registroInvalido = PseudoClass.getPseudoClass("registro-invalido");
+
                             tabela.setRowFactory(tv -> new TableRow<RegistroCSV>() {
 
                                 @Override 
                                 protected void updateItem(RegistroCSV registro, boolean vazio) {
                                     super.updateItem(registro, vazio);
+                                    
+                                    boolean linhaInvalida = !vazio && registro != null && !registro.isValido();
 
-                                    if (vazio || registro == null) {
-                                        setStyle("");
-                                    } else if (!registro.isValido()) {
-                                        setStyle("-fx-background-color: #ffd6d6;");
-                                    } else {
-                                        setStyle("");
-                                    }
+                                    pseudoClassStateChanged(
+                                        registroInvalido, 
+                                        linhaInvalida
+                                    );
                                 }
                             });
 

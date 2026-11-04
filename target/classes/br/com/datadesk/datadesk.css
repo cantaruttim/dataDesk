@@ -59,3 +59,7 @@
 .table-row-cell:filled:selected {
     -fx-background-color: #D6E8FA;
 }
+
+.table-row-cell:registro-invalido {
+    -fx-background-color: #ffd6d6;
+}
