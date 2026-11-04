@@ -1,8 +1,11 @@
 package br.com.datadesk;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistroCSV {
     private final String[] campos;
-    private final boolean valido;
+    private final List<String> erros;
     
     public RegistroCSV(
         String[] campos, 
@@ -10,17 +13,29 @@ public class RegistroCSV {
     ) {
         this.campos = campos;
 
-        boolean qtdCorreta = campos.length == qtdColunasEsperadas;
-        boolean camposPreenchidos = true;
+        List<String> errosEncontrados = new ArrayList<>();
+        
+        // Valida a quantidade de colunas
+        if (campos.length != qtdColunasEsperadas) {
+            errosEncontrados.add(
+                "Quantidade de colunas incorreta: esperado "
+                + qtdColunasEsperadas
+                + ", encontrado "
+                + campos.length
+            );
+        }
 
-        for (String campo : campos) {
-            if (campo == null || campo.isBlank()) {
-                camposPreenchidos = false;
-                break;
+        // Validação dos campos vazios
+        for (int i = 0; i < campos.length; i++) {
+
+            if (campos[i] == null || campos[i].isBlank()) {
+                errosEncontrados.add(
+                    "Campo " + (i + 1) + " está vazio."
+                );
             }
         }
 
-        this.valido = qtdCorreta && camposPreenchidos;
+        this.erros = List.copyOf(errosEncontrados); // lista imutável com os erros encontrados
 
     }
 
@@ -29,7 +44,11 @@ public class RegistroCSV {
     }
     
     public boolean isValido() {
-        return valido;
+        return erros.isEmpty();
+    }
+
+    public List<String> getErros() {
+        return erros;
     }
 
 }
