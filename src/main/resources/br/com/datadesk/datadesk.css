@@ -63,3 +63,52 @@
 .table-row-cell:registro-invalido {
     -fx-background-color: #ffd6d6;
 }
+
+
+
+/* MENU LATERAL */
+.sidebar {
+    -fx-background-color: #172D4A;
+    -fx-padding: 24px 14px;
+    -fx-spacing: 12px;
+    -fx-pref-width: 210px;
+}
+
+/* Nome da aplicação */
+.sidebar-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+}
+
+/* Subtítulo */
+.sidebar-subtitle {
+    -fx-text-fill: #A9BCD2;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 18px 0;
+}
+
+/* Botões de navegação */
+.sidebar .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #D9E4F2;
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 14px;
+    -fx-background-radius: 8px;
+}
+
+/* Hover */
+.sidebar .button:hover {
+    -fx-background-color: #294461;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* Página selecionada */
+.sidebar .button.menu-button-active {
+    -fx-background-color: #2878C8;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}

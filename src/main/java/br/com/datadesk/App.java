@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.css.PseudoClass;
+import javafx.geometry.Pos;
 
 public class App extends Application {
 
@@ -39,18 +40,45 @@ public class App extends Application {
         Button botaoArquivos = new Button("Arquivos");
         Button botaoProcessamento = new Button("Processamento");
 
-        VBox menuLateral = new VBox(
-            10,
+        VBox menuLateral = new VBox(12);
+
+        menuLateral.getStyleClass().add("sidebar");
+
+        // Identidade visual
+        Label nomeAplicacao = new Label("DataDesk");
+        nomeAplicacao.getStyleClass().add("sidebar-title");
+
+        Label descricao = new Label("DATA ENGINEERING");
+        descricao.getStyleClass().add("sidebar-subtitle");
+
+        // Estilização dos botões
+        Button[] botoesMenu = {
+            botaoInicio, botaoArquivos, botaoProcessamento
+        };
+        
+        for (Button botao: botoesMenu) {
+            botao.getStyleClass().add("sidebar-button");
+            botao.setMaxWidth(Double.MAX_VALUE);
+            botao.setAlignment(Pos.CENTER_LEFT);
+        }
+
+        // Conteúdo do Menu
+        menuLateral.getChildren().addAll(
+            nomeAplicacao,
+            descricao,
             botaoInicio,
             botaoArquivos,
             botaoProcessamento
         );
+
         layoutPrincipal.setLeft(menuLateral);
 
         botaoInicio.setOnAction(event -> {
             layoutPrincipal.setCenter(
                 new Label("Bem-vindo à tela Inicial!")
             );
+
+            atualizaMenuAtivo(botaoInicio, botaoInicio, botaoArquivos, botaoProcessamento);
         });
 
         botaoArquivos.setOnAction(event -> {
@@ -258,6 +286,7 @@ public class App extends Application {
             });
 
 
+            atualizaMenuAtivo(botaoArquivos, botaoInicio, botaoArquivos, botaoProcessamento);
 
         });
 
@@ -265,6 +294,9 @@ public class App extends Application {
             layoutPrincipal.setCenter(
                 new Label("Tela de Processamento - em desenvolvimento")
             );
+
+            atualizaMenuAtivo(botaoProcessamento, botaoInicio, botaoArquivos, botaoProcessamento);
+
         });
 
 
@@ -300,4 +332,13 @@ public class App extends Application {
         stage.show();
 
     }
+
+    private void atualizaMenuAtivo(Button botaoAtivo, Button... botoes) {
+        for (Button botao: botoes) {
+            botao.getStyleClass().remove("menu-button-active");
+        }
+
+        botaoAtivo.getStyleClass().add("menu-button-active");
+    }
+
 }
