@@ -31,9 +31,23 @@ public class App extends Application {
         // 1. Layout principal
         BorderPane layoutPrincipal = new BorderPane();
 
-        // 2. Cabeçalho
-        Label titulo = new Label("DataDesk");
-        layoutPrincipal.setTop(titulo);
+        // 2. Tela Inicial
+        Label tituloInicial = new Label("Visão Geral");
+        tituloInicial.getStyleClass().add("page-title");
+
+        Label descricaoInicio = new Label(
+            "Acompanhe seus arquivos e processos de dados"
+        );
+        descricaoInicio.getStyleClass().add("page-description");
+
+        VBox telaInicio = new VBox(
+            10,
+            tituloInicial,
+            descricaoInicio
+        );
+
+        telaInicio.getStyleClass().add("page-content"); 
+
 
         // 3. Menu lateral
         Button botaoInicio = new Button("Início");
@@ -69,6 +83,11 @@ public class App extends Application {
             botaoInicio,
             botaoArquivos,
             botaoProcessamento
+        );
+
+        layoutPrincipal.setCenter(telaInicio);
+        atualizaMenuAtivo(
+            botaoInicio, botaoInicio, botaoArquivos, botaoProcessamento
         );
 
         layoutPrincipal.setLeft(menuLateral);

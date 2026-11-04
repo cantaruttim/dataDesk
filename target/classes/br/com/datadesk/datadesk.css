@@ -112,3 +112,24 @@
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
+
+
+
+/* Área principal */
+.page-content {
+    -fx-background-color: #F2F5F9;
+    -fx-padding: 30px;
+}
+
+/* Título da página */
+.page-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172D4A;
+}
+
+/* Descrição da página */
+.page-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+}
