@@ -176,6 +176,21 @@ public class App extends Application {
 
                             tabela.getColumns().add(colunaStatus);
 
+                            // Criando a coluna de Erros
+                            TableColumn<RegistroCSV, String> colunaErros = new TableColumn<>("Erros");
+                            colunaErros.setCellValueFactory(celula -> {
+                                RegistroCSV registro = celula.getValue();
+
+                                String erros = registro.getErros().isEmpty()
+                                    ? "-"
+                                                            // método getErros retorna uma List<String> que posteriormente é transformada em uma única String
+                                    : String.join(" | ", registro.getErros());
+
+                                return new ReadOnlyStringWrapper(erros);
+                            });
+
+                            tabela.getColumns().add(colunaErros);
+
                             // Preparando os registros
                             ObservableList<RegistroCSV> dadosTabela = 
                                 FXCollections.observableArrayList();
