@@ -133,3 +133,34 @@
     -fx-font-size: 13px;
     -fx-text-fill: #64748B;
 }
+
+
+/* Cards do dashboard */
+.dashboard-card {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20px;
+    -fx-spacing: 8px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #DCE3EB;
+    -fx-border-radius: 10px;
+    -fx-pref-width: 260px;
+}
+
+/* Título do card */
+.card-title {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+}
+
+/* Valor do indicador */
+.card-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172D4A;
+}
+
+/* Descrição do card */
+.card-description {
+    -fx-font-size: 11px;
+    -fx-text-fill: #94A3B8;
+}

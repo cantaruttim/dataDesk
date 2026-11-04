@@ -48,6 +48,28 @@ public class App extends Application {
 
         telaInicio.getStyleClass().add("page-content"); 
 
+        // Primeiro card: arquivos importados
+
+        Label tituloCardArquivos = new Label("Arquivos importados");
+        tituloCardArquivos.getStyleClass().add("card-title");
+
+        Label valorCardArquivos = new Label("0");
+        valorCardArquivos.getStyleClass().add("card-value");
+
+        Label descricaoCardArquivos = new Label(
+            "Arquivos carregados nesta sessão"
+        );
+        descricaoCardArquivos.getStyleClass().add("card-description");
+
+        VBox cardArquivos = new VBox(
+            8,
+            tituloCardArquivos,
+            valorCardArquivos,
+            descricaoCardArquivos
+        );
+        cardArquivos.getStyleClass().add("dashboard-card");
+        telaInicio.getChildren().add(cardArquivos);
+
 
         // 3. Menu lateral
         Button botaoInicio = new Button("Início");
@@ -94,7 +116,7 @@ public class App extends Application {
 
         botaoInicio.setOnAction(event -> {
             layoutPrincipal.setCenter(
-                new Label("Bem-vindo à tela Inicial!")
+                telaInicio
             );
 
             atualizaMenuAtivo(botaoInicio, botaoInicio, botaoArquivos, botaoProcessamento);
