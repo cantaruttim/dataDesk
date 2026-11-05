@@ -142,6 +142,12 @@ public class App extends Application {
 
         cardTotalRegistros.getStyleClass().add("dashboard-card");
 
+        descricaoTotalRegistros.getStyleClass().add("card-description");
+
+        descricaoRegistrosValidos.getStyleClass().add("card-description");
+
+        descricaoRegistrosInvalidos.getStyleClass().add("card-description");
+
 
         // Card de registros válidos
         VBox cardRegistrosValidos = new VBox(
@@ -462,7 +468,7 @@ public class App extends Application {
 
         if (caminhoCss == null) {
             throw new IllegalStateException(
-                "Arquivo css não encontrado."
+                "Arquivo .css não encontrado."
             );
         }
 

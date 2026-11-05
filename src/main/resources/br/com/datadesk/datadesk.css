@@ -137,12 +137,16 @@
 
 /* Cards do dashboard */
 .dashboard-card {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #FFF3CD;
     -fx-padding: 20px;
     -fx-spacing: 8px;
+
     -fx-background-radius: 10px;
-    -fx-border-color: #DCE3EB;
+
+    -fx-border-color: #FF8C00;
+    -fx-border-width: 3px;
     -fx-border-radius: 10px;
+
     -fx-pref-width: 260px;
 }
 
@@ -163,4 +167,38 @@
 .card-description {
     -fx-font-size: 11px;
     -fx-text-fill: #94A3B8;
+}
+
+
+/* Cards do dashboard */
+.dashboard-card {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20px;
+    -fx-spacing: 8px;
+
+    -fx-background-radius: 10px;
+    -fx-border-color: #DCE3EB;
+    -fx-border-radius: 10px;
+
+    -fx-pref-width: 260px;
+}
+
+.card-title {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+}
+
+.card-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #172D4A;
+}
+
+
+.card-value-success {
+    -fx-text-fill: #16845B;
+}
+
+.card-value-danger {
+    -fx-text-fill: #C74747;
 }
