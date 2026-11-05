@@ -58,6 +58,10 @@ public class App extends Application {
 
         // contador de arquivos
         IntegerProperty qtdArquivosImportados = new SimpleIntegerProperty(0);
+        IntegerProperty qtdTotalRegistros = new SimpleIntegerProperty(0);
+        IntegerProperty qtdTotalRegistrosValidos = new SimpleIntegerProperty(0);
+        IntegerProperty qtdTotalRegistrosInvalidos = new SimpleIntegerProperty(0);
+
         // Label do contador
         Label valorCardArquivos = new Label();
         valorCardArquivos.textProperty().bind(qtdArquivosImportados.asString());
@@ -77,6 +81,35 @@ public class App extends Application {
         );
         cardArquivos.getStyleClass().add("dashboard-card");
         telaInicio.getChildren().add(cardArquivos);
+
+        // Label: total de registros
+        Label valorTotalRegistros = new Label();
+
+        valorTotalRegistros.textProperty().bind(
+            qtdTotalRegistros.asString()
+        );
+
+        valorTotalRegistros.getStyleClass().add("card-value");
+
+
+        // Label: registros válidos
+        Label valorRegistrosValidos = new Label();
+
+        valorRegistrosValidos.textProperty().bind(
+            qtdTotalRegistrosValidos.asString()
+        );
+
+        valorRegistrosValidos.getStyleClass().add("card-value");
+
+
+        // Label: registros inválidos
+        Label valorRegistrosInvalidos = new Label();
+
+        valorRegistrosInvalidos.textProperty().bind(
+            qtdTotalRegistrosInvalidos.asString()
+        );
+
+        valorRegistrosInvalidos.getStyleClass().add("card-value");
 
 
         // 3. Menu lateral
