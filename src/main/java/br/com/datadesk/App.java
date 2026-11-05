@@ -111,6 +111,64 @@ public class App extends Application {
 
         valorRegistrosInvalidos.getStyleClass().add("card-value");
 
+        // Card: total de registros
+        Label tituloTotalRegistros = new Label("Registros analisados");
+        tituloTotalRegistros.getStyleClass().add("card-title");
+
+        Label descricaoTotalRegistros = new Label("Total no último arquivo");
+
+
+        // Card: registros válidos
+        Label tituloRegistrosValidos = new Label("Registros válidos");
+        tituloRegistrosValidos.getStyleClass().add("card-title");
+
+        Label descricaoRegistrosValidos = new Label("Dados aprovados na validação");
+
+
+        // Card: registros inválidos
+        Label tituloRegistrosInvalidos = new Label("Registros inválidos");
+        tituloRegistrosInvalidos.getStyleClass().add("card-title");
+
+        Label descricaoRegistrosInvalidos = new Label("Dados que precisam de atenção"); 
+
+
+        // Card de registros analisados
+        VBox cardTotalRegistros = new VBox(
+            8,
+            tituloTotalRegistros,
+            valorTotalRegistros,
+            descricaoTotalRegistros
+        );
+
+        cardTotalRegistros.getStyleClass().add("dashboard-card");
+
+
+        // Card de registros válidos
+        VBox cardRegistrosValidos = new VBox(
+            8,
+            tituloRegistrosValidos,
+            valorRegistrosValidos,
+            descricaoRegistrosValidos
+        );
+
+        cardRegistrosValidos.getStyleClass().add("dashboard-card");
+
+
+        // Card de registros inválidos
+        VBox cardRegistrosInvalidos = new VBox(
+            8,
+            tituloRegistrosInvalidos,
+            valorRegistrosInvalidos,
+            descricaoRegistrosInvalidos
+        );
+
+        cardRegistrosInvalidos.getStyleClass().add("dashboard-card");
+
+        telaInicio.getChildren().addAll(
+            cardTotalRegistros,
+            cardRegistrosValidos,
+            cardRegistrosInvalidos
+        );
 
         // 3. Menu lateral
         Button botaoInicio = new Button("Início");
