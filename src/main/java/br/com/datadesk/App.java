@@ -22,6 +22,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.css.PseudoClass;
 import javafx.geometry.Pos;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 
 public class App extends Application {
 
@@ -53,8 +56,13 @@ public class App extends Application {
         Label tituloCardArquivos = new Label("Arquivos importados");
         tituloCardArquivos.getStyleClass().add("card-title");
 
-        Label valorCardArquivos = new Label("0");
-        valorCardArquivos.getStyleClass().add("card-value");
+        // contador de arquivos
+        IntegerProperty qtdArquivosImportados = new SimpleIntegerProperty(0);
+        // Label do contador
+        Label valorCardArquivos = new Label();
+        valorCardArquivos.textProperty().bind(qtdArquivosImportados.asString());
+
+        valorCardArquivos.getStyleClass().add("card-value"); 
 
         Label descricaoCardArquivos = new Label(
             "Arquivos carregados nesta sessão"
@@ -314,6 +322,9 @@ public class App extends Application {
                                 arquivoSelecionado,
                                 tabela  
                             );
+
+                            // Incrementa a quantidade de arquivos importados
+                            qtdArquivosImportados.set(qtdArquivosImportados.get() + 1);
 
                         }
                         
